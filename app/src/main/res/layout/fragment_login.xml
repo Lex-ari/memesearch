@@ -9,7 +9,7 @@
     tools:context=".LoginFragment">
 
     <EditText
-        android:id="@+id/fragmentRegistration_editText_password"
+        android:id="@+id/fragmentLogin_editText_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -21,10 +21,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_username" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentLogin_editText_username" />
 
     <EditText
-        android:id="@+id/fragmentRegistration_editText_username"
+        android:id="@+id/fragmentLogin_editText_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -32,11 +32,11 @@
         android:fontFamily="@font/poppins_bold"
         android:hint="username"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_password"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentLogin_editText_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_textView_appName" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentLogin_textView_appName" />
 
     <TextView
         android:id="@+id/fragmentLogin_textView_firstTime"
@@ -46,11 +46,11 @@
         android:text="first time?"
         android:textColor="#0027FF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/fragmentRegistration_editText_password"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_password" />
+        app:layout_constraintStart_toStartOf="@+id/fragmentLogin_editText_password"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentLogin_editText_password" />
 
     <TextView
-        android:id="@+id/fragmentRegistration_textView_appName"
+        android:id="@+id/fragmentLogin_textView_appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
@@ -58,7 +58,7 @@
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_username"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentLogin_editText_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

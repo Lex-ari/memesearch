@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.fragment_registration.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +36,13 @@ class RegistrationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registration, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_registration, container, false)
+
+        rootView.fragmentRegistration_textView_cancel.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_registrationFragment_to_loginFragment)
+        }
+
+        return rootView
     }
 
     companion object {

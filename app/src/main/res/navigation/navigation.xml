@@ -20,7 +20,11 @@
         android:id="@+id/detailedMemeFragment"
         android:name="com.example.memesearch.DetailedMemeFragment"
         android:label="fragment_detailed_meme"
-        tools:layout="@layout/fragment_detailed_meme" />
+        tools:layout="@layout/fragment_detailed_meme" >
+        <action
+            android:id="@+id/action_detailedMemeFragment_to_gallaryFragment"
+            app:destination="@id/gallaryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/gallaryFragment"
         android:name="com.example.memesearch.GallaryFragment"
@@ -29,10 +33,17 @@
         <action
             android:id="@+id/action_gallaryFragment_to_detailedMemeFragment"
             app:destination="@id/detailedMemeFragment" />
+        <action
+            android:id="@+id/action_gallaryFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.memesearch.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" />
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

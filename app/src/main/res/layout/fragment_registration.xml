@@ -17,6 +17,8 @@
         android:textColor="#A9B0D5"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/fragmentRegistration_textView_register"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/fragmentRegistration_textView_register"
         app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_textView_register" />
 
@@ -30,8 +32,10 @@
         android:hint="username"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_name"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_textView_appName"
-        tools:layout_editor_absoluteX="59dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_textView_appName" />
 
     <EditText
         android:id="@+id/fragmentRegistration_editText_password"
@@ -43,8 +47,10 @@
         android:hint="password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_confirmPassword"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_name"
-        tools:layout_editor_absoluteX="59dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_name" />
 
     <EditText
         android:id="@+id/fragmentRegistration_editText_name"
@@ -56,8 +62,10 @@
         android:hint="name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_password"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_username"
-        tools:layout_editor_absoluteX="59dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_username" />
 
     <EditText
         android:id="@+id/fragmentRegistration_editText_email"
@@ -69,8 +77,10 @@
         android:hint="email"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_textView_register"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_confirmPassword"
-        tools:layout_editor_absoluteX="59dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_confirmPassword" />
 
     <EditText
         android:id="@+id/fragmentRegistration_editText_confirmPassword"
@@ -82,8 +92,10 @@
         android:hint="confirm password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_email"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_password"
-        tools:layout_editor_absoluteX="59dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_password" />
 
     <TextView
         android:id="@+id/fragmentRegistration_textView_appName"
@@ -95,9 +107,11 @@
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:layout_editor_absoluteX="140dp" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/fragmentRegistration_textView_register"
@@ -109,6 +123,8 @@
         android:textColor="#0027FF"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_textView_cancel"
+        app:layout_constraintEnd_toEndOf="@+id/fragmentRegistration_editText_email"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/fragmentRegistration_editText_email"
         app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_email" />
 
