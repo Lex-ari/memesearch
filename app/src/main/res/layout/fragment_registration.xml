@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationFragment">
+
+    <TextView
+        android:id="@+id/fragmentRegistration_textView_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="or not that's totally fine"
+        android:textColor="#A9B0D5"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/fragmentRegistration_textView_register"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_textView_register" />
+
+    <EditText
+        android:id="@+id/fragmentRegistration_editText_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:fontFamily="@font/poppins_bold"
+        android:hint="username"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_name"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_textView_appName"
+        tools:layout_editor_absoluteX="59dp" />
+
+    <EditText
+        android:id="@+id/fragmentRegistration_editText_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:fontFamily="@font/poppins_bold"
+        android:hint="password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_confirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_name"
+        tools:layout_editor_absoluteX="59dp" />
+
+    <EditText
+        android:id="@+id/fragmentRegistration_editText_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:fontFamily="@font/poppins_bold"
+        android:hint="name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_password"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_username"
+        tools:layout_editor_absoluteX="59dp" />
+
+    <EditText
+        android:id="@+id/fragmentRegistration_editText_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:fontFamily="@font/poppins_bold"
+        android:hint="email"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_textView_register"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_confirmPassword"
+        tools:layout_editor_absoluteX="59dp" />
+
+    <EditText
+        android:id="@+id/fragmentRegistration_editText_confirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:fontFamily="@font/poppins_bold"
+        android:hint="confirm password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_email"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_password"
+        tools:layout_editor_absoluteX="59dp" />
+
+    <TextView
+        android:id="@+id/fragmentRegistration_textView_appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="meme.search"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_editText_username"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:layout_editor_absoluteX="140dp" />
+
+    <TextView
+        android:id="@+id/fragmentRegistration_textView_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="take me to the memes"
+        android:textColor="#0027FF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentRegistration_textView_cancel"
+        app:layout_constraintStart_toStartOf="@+id/fragmentRegistration_editText_email"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRegistration_editText_email" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
