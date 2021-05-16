@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity" >
+    tools:context=".UserInfoActivity">
     <fragment
-        android:id="@+id/mainNavHostFragment"
+        android:id="@+id/userInfoNavigationFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:navGraph="@navigation/login_navigation"
+        app:navGraph="@navigation/user_info_navigation"
         app:defaultNavHost="true" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

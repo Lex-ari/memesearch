@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_info_navigation"
+    app:startDestination="@id/gallaryFragment">
+
+    <fragment
+        android:id="@+id/gallaryFragment"
+        android:name="com.example.memesearch.GallaryFragment"
+        android:label="fragment_gallary"
+        tools:layout="@layout/fragment_gallary" >
+        <action
+            android:id="@+id/action_gallaryFragment_to_detailedMemeFragment"
+            app:destination="@id/detailedMemeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailedMemeFragment"
+        android:name="com.example.memesearch.DetailedMemeFragment"
+        android:label="fragment_detailed_meme"
+        tools:layout="@layout/fragment_detailed_meme" />
+</navigation>
