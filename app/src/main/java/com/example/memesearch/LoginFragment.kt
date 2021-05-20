@@ -29,11 +29,19 @@ class LoginFragment : Fragment(){
         val rootView = inflater.inflate(R.layout.fragment_login, container, false)
         val TAG = "LoginFragment"
 
+                //if (arguments != null) {
+            rootView.fragmentLogin_editText_username.setText(arguments?.getString("username"))
+            rootView.fragmentLogin_editText_password.setText(arguments?.getString("password"))
+                    //}
 
         rootView.fragmentLogin_textView_firstTime.setOnClickListener {
             LoginActivity.EXTRA_USERNAME = fragmentLogin_editText_username.text.toString()
             Log.d(TAG, "onCreateView: EXTRA_USERNAME is " + LoginActivity.EXTRA_USERNAME)
-            view?.findNavController()?.navigate(R.id.action_loginFragment_to_registrationFragment)
+
+            val bundle =  Bundle();
+            bundle.putString("username", fragmentLogin_editText_username.text.toString())
+            bundle.putString("password", fragmentLogin_editText_password.text.toString())
+            view?.findNavController()?.navigate(R.id.action_loginFragment_to_registrationFragment, bundle)
         }
         return rootView
     }
