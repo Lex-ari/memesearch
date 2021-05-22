@@ -9,7 +9,7 @@
         android:id="@+id/gallaryFragment"
         android:name="com.example.memesearch.GalleryFragment"
         android:label="fragment_gallary"
-        tools:layout="@layout/fragment_gallary" >
+        tools:layout="@layout/fragment_gallery" >
         <action
             android:id="@+id/action_gallaryFragment_to_detailedMemeFragment"
             app:destination="@id/detailedMemeFragment" />
