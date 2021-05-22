@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.findNavController
+import com.backendless.Backendless
+import com.backendless.BackendlessUser
+import com.backendless.async.callback.AsyncCallback
+import com.backendless.exceptions.BackendlessFault
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_registration.*
 import kotlinx.android.synthetic.main.fragment_registration.view.*
@@ -33,22 +37,59 @@ class RegistrationFragment : Fragment() {
         //Log.d(TAG, "onCreateView: username:" + arguments?.getString("username"))
         val bundle = Bundle()
 
+        val registrationUsername = rootView.fragmentRegistration_editText_username
+        val registrationPassword = rootView.fragmentRegistration_editText_password
+        val registrationName = rootView.fragmentRegistration_editText_name
+        val registrationConfirmPassword = rootView.fragmentRegistration_editText_confirmPassword
+        val registrationEmail = rootView.fragmentRegistration_editText_email
 
-        rootView.fragmentRegistration_editText_username.setText(arguments?.getString("username"))
-        rootView.fragmentRegistration_editText_password.setText(arguments?.getString("password"))
+
+        registrationUsername.setText(arguments?.getString("username"))
+        registrationPassword.setText(arguments?.getString("password"))
 
         rootView.fragmentRegistration_textView_register.setOnClickListener{
-            if (rootView.fragmentRegistration_editText_username.text.toString() == ""){
+            if (registrationUsername.text.toString() == ""){
                 Toast.makeText(activity, "Please enter a username", Toast.LENGTH_SHORT).show()
-                fragmentRegistration_editText_username.setHintTextColor(android.graphics.Color.RED)
-                fragmentRegistration_editText_username.requestFocus()
-            } else if(rootView.fragmentRegistration_editText_name.text.toString() == ""){
+                registrationUsername.setHintTextColor(android.graphics.Color.RED)
+                registrationUsername.requestFocus()
+            } else if(registrationName.text.toString() == ""){
                 Toast.makeText(activity, "Please enter a name", Toast.LENGTH_SHORT).show()
-                fragmentRegistration_editText_name.setHintTextColor(android.graphics.Color.RED)
-                fragmentRegistration_editText_name.requestFocus()
+                registrationName.setHintTextColor(android.graphics.Color.RED)
+                registrationName.requestFocus()
+            } else if(registrationPassword.text.toString() == ""){
+                Toast.makeText(activity, "Please enter a password", Toast.LENGTH_SHORT).show()
+                registrationPassword.setHintTextColor(android.graphics.Color.RED)
+                registrationName.requestFocus()
+            } else if(registrationConfirmPassword.text.toString() != registrationPassword.text.toString()){
+                Toast.makeText(activity, "Passwords need to match", Toast.LENGTH_SHORT).show()
+                registrationConfirmPassword.setHintTextColor(android.graphics.Color.RED)
+                registrationConfirmPassword.requestFocus()
+            } else if(registrationEmail.text.toString() == ""){
+                Toast.makeText(activity, "Please enter an email", Toast.LENGTH_SHORT).show()
+                registrationEmail.setHintTextColor(android.graphics.Color.RED)
+                registrationEmail.requestFocus()
+            } else {
+                //Registering with Backendless
+                registerUser(registrationUsername.text.toString(), registrationName.text.toString(), registrationPassword.text.toString(), registrationEmail.text.toString())
             }
-
         }
+
+        registrationName.setOnClickListener{
+            registrationName.setHintTextColor(android.graphics.Color.GRAY)
+        }
+        registrationUsername.setOnClickListener {
+            registrationUsername.setHintTextColor(android.graphics.Color.GRAY)
+        }
+        registrationPassword.setOnClickListener{
+            registrationPassword.setHintTextColor(android.graphics.Color.GRAY)
+        }
+        registrationConfirmPassword.setOnClickListener {
+            registrationConfirmPassword.setHintTextColor(android.graphics.Color.GRAY)
+        }
+        registrationEmail.setOnClickListener {
+            registrationEmail.setHintTextColor(android.graphics.Color.GRAY)
+        }
+
         rootView.fragmentRegistration_textView_cancel.setOnClickListener {
             bundle.putString("username", fragmentRegistration_editText_username.text.toString())
             bundle.putString("password", fragmentRegistration_editText_password.text.toString())
@@ -56,6 +97,29 @@ class RegistrationFragment : Fragment() {
         }
 
         return rootView
+    }
+
+    private fun registerUser(username : String, name : String, password : String, email : String){
+        val user = BackendlessUser()
+        user.setProperty("username", username)
+        user.setProperty("name", name)
+        user.setProperty("email", email)
+        user.password = password
+
+        Backendless.UserService.register(user, object : AsyncCallback<BackendlessUser?>{
+            override fun handleResponse(registeredUser: BackendlessUser?) {
+                val bundle = Bundle()
+                bundle.putString("username", fragmentRegistration_editText_username.text.toString())
+                bundle.putString("password", fragmentRegistration_editText_password.text.toString())
+                view?.findNavController()?.navigate(R.id.action_registrationFragment_to_loginFragment2, bundle)
+                // Navigates to login activity with username and password ready to go
+            }
+
+            override fun handleFault(fault: BackendlessFault) {
+                Toast.makeText(activity, fault.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     companion object {
