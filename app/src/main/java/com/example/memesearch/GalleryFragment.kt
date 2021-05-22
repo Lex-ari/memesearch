@@ -8,10 +8,10 @@ import android.view.ViewGroup
 
 /**
  * A simple [Fragment] subclass.
- * Use the [GallaryFragment.newInstance] factory method to
+ * Use the [GalleryFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class GallaryFragment : Fragment() {
+class GalleryFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +38,6 @@ class GallaryFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-            GallaryFragment()
+            GalleryFragment()
     }
 }

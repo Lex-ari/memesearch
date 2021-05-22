@@ -57,10 +57,12 @@ class LoginFragment : Fragment(){
                     Toast.makeText(activity, "Welcome $username", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "handleResponse: User $username successfully logged in")
 
-                    val gallaryIntent = Intent(activity, UserSpaceActivity::class.java).apply {
+                    val userSpaceIntent = Intent(activity, UserSpaceActivity::class.java).apply {
                         putExtra(EXTRA_USERNAME, username)
                         putExtra(EXTRA_PASSWORD, password)
                     }
+                    startActivity(userSpaceIntent)
+                    activity?.finish()
                 }
                 override fun handleFault(fault: BackendlessFault?){
                     Toast.makeText(activity, "Something went wrong. Check logs.", Toast.LENGTH_SHORT).show()

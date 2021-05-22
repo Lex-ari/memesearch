@@ -11,6 +11,6 @@ class UserSpaceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_UserSpace)
+        setContentView(R.layout.activity_userspace)
     }
 }
