@@ -1,41 +1,58 @@
 package com.example.memesearch.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.memesearch.R
+import com.example.memesearch.models.MemeObject
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_detailed_meme.view.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailedMemeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class DetailedMemeFragment : Fragment() {
+
+    val TAG = "DetailedMemeFragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detailed_meme, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_detailed_meme, container, false)
+        val detailedMeme : MemeObject? = arguments?.getParcelable("meme")
+        Log.d(TAG, "onCreateView: $detailedMeme")
+
+        Picasso.get().load(detailedMeme?.source).into(rootView.fragmentDetailedMeme_imageView_meme)
+
+
+        return rootView
     }
 
+    // https://mobikul.com/android-chips-dynamicaly-add-remove-tags-chips-view/
+    private fun setTag(tagList: List<String>, rootView: View) {
+        var chipGroup = rootView.fragmentDetailedMeme_chipGroup_tags
+        for (tag in tagList){
+            var chip = Chip(activity)
+            chip.text = tag
+            chipGroup.addView(chip)
+        }
+    }
+
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailedMemeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance() =
             DetailedMemeFragment()

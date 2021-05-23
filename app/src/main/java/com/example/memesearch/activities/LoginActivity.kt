@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         // back button in teh action bar known as teh "up button"
-        NavigationUI.setupActionBarWithNavController(this, navController)
+        //NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {

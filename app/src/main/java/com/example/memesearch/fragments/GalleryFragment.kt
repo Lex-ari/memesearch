@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.backendless.Backendless
 import com.backendless.async.callback.AsyncCallback
@@ -37,7 +38,7 @@ class GalleryFragment : Fragment() {
         rootView = inflater.inflate(R.layout.fragment_gallery, container, false)
 
         userId = Backendless.UserService.CurrentUser().userId
-        Log.d(TAG, "onCreateView : userId = ${userId.toString()}")
+        Log.d(TAG, "onCreateView : userId = $userId")
 
 
         loadAllMemes()
@@ -62,7 +63,7 @@ class GalleryFragment : Fragment() {
         Backendless.Data.of(MemeObject::class.java).find(queryBuilder, object : AsyncCallback<List<MemeObject>>{
             override fun handleResponse(foundMemes: List<MemeObject>){
                 memeList = foundMemes
-                Log.d(TAG, "handleResponse: ${foundMemes}")
+                Log.d(TAG, "handleResponse: $foundMemes")
                 Log.d(TAG, "getAllMemes: memeList size : ${memeList.size}")
                 rootView.fragmentGallery_recyclerView_gallery.apply {
                     setHasFixedSize(true)
@@ -76,6 +77,13 @@ class GalleryFragment : Fragment() {
         })
         return memeList
     }
+
+    /*fun goToDetailedMeme(meme : MemeObject){
+        var bundle = Bundle()
+        bundle.putParcelable("meme", meme)
+
+        view?.findNavController()?.navigate(R.id.action_gallaryFragment_to_detailedMemeFragment, bundle)
+    }*/
 
     companion object {
         val TAG = "GalleryFragment"

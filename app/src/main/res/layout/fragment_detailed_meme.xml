@@ -7,14 +7,16 @@
     tools:context=".fragments.DetailedMemeFragment" >
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/fragmentDetailedMeme_imageView_meme"
         android:layout_width="0dp"
-        android:layout_height="288dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/fragmentDetailedMeme_textView_memeName"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/fragmentDetailedMeme_textView_memeName"
@@ -53,23 +55,17 @@
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentDetailedMeme_imageView_meme" />
 
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/fragmentDetailedMeme_flow_tags"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/fragmentDetailedMeme_chipGroup_tags"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
-        app:constraint_referenced_ids="fragmentDetailedMeme_recyclerView_memeTags"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentDetailedMeme_textView_tags" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentDetailedMeme_textView_tags">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragmentDetailedMeme_recyclerView_memeTags"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="479dp" />
+    </com.google.android.material.chip.ChipGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
