@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/gallaryFragment"
-        android:name="com.example.memesearch.GalleryFragment"
+        android:name="com.example.memesearch.fragments.GalleryFragment"
         android:label="fragment_gallary"
         tools:layout="@layout/fragment_gallery" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailedMemeFragment"
-        android:name="com.example.memesearch.DetailedMemeFragment"
+        android:name="com.example.memesearch.fragments.DetailedMemeFragment"
         android:label="fragment_detailed_meme"
         tools:layout="@layout/fragment_detailed_meme" />
 </navigation>

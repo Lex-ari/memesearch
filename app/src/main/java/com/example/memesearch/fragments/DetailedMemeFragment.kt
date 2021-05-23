@@ -1,10 +1,11 @@
-package com.example.memesearch
+package com.example.memesearch.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.memesearch.R
 
 /**
  * A simple [Fragment] subclass.

@@ -1,4 +1,4 @@
-package com.example.memesearch
+package com.example.memesearch.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,8 +13,11 @@ import com.backendless.Backendless
 import com.backendless.BackendlessUser
 import com.backendless.async.callback.AsyncCallback
 import com.backendless.exceptions.BackendlessFault
-import com.example.memesearch.LoginActivity.Companion.EXTRA_PASSWORD
-import com.example.memesearch.LoginActivity.Companion.EXTRA_USERNAME
+import com.example.memesearch.activities.LoginActivity
+import com.example.memesearch.activities.LoginActivity.Companion.EXTRA_PASSWORD
+import com.example.memesearch.activities.LoginActivity.Companion.EXTRA_USERNAME
+import com.example.memesearch.R
+import com.example.memesearch.activities.UserSpaceActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 

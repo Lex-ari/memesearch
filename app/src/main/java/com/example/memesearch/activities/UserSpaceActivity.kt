@@ -1,7 +1,8 @@
-package com.example.memesearch
+package com.example.memesearch.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.memesearch.R
 
 class UserSpaceActivity : AppCompatActivity() {
     companion object {

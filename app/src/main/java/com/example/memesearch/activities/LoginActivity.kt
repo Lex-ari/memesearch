@@ -1,4 +1,4 @@
-package com.example.memesearch
+package com.example.memesearch.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.backendless.Backendless
+import com.example.memesearch.Constants
+import com.example.memesearch.R
 
 
 class LoginActivity : AppCompatActivity() {
