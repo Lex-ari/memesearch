@@ -18,5 +18,9 @@
         android:id="@+id/detailedMemeFragment"
         android:name="com.example.memesearch.fragments.DetailedMemeFragment"
         android:label="fragment_detailed_meme"
-        tools:layout="@layout/fragment_detailed_meme" />
+        tools:layout="@layout/fragment_detailed_meme" >
+        <action
+            android:id="@+id/action_detailedMemeFragment_to_gallaryFragment"
+            app:destination="@id/gallaryFragment" />
+    </fragment>
 </navigation>

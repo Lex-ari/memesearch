@@ -4,27 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.DetailedMemeFragment" >
+    tools:context=".fragments.DetailedMemeFragment">
+
+    <TextView
+        android:id="@+id/fragmentDetailedMeme_textView_deleteMeme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="delete ungodly-like meme"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentDetailedMeme_textView_editMode"
+        tools:visibility="visible" />
+
+    <EditText
+        android:id="@+id/fragmentDetailedMeme_editText_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:hint="title"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/fragmentDetailedMeme_imageView_meme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentDetailedMeme_textView_memeName"
+        app:layout_constraintTop_toBottomOf="@id/barrier4"
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/fragmentDetailedMeme_textView_memeName"
+        android:id="@+id/fragmentDetailedMeme_textView_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Title Meme"
+        android:hint="title"
         android:textColor="#000000"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -48,7 +73,6 @@
         android:id="@+id/fragmentDetailedMeme_textView_tags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
         android:text="tags"
@@ -60,12 +84,61 @@
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/fragmentDetailedMeme_chipGroup_tags"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/fragmentDetailedMeme_textView_tags">
 
     </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/fragmentDetailedMeme_textView_uploaded"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="uploaded :"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentDetailedMeme_chipGroup_tags" />
+
+    <TextView
+        android:id="@+id/fragmentDetailedMeme_textView_source"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="very long link"
+        android:textAlignment="textEnd"
+        android:textColor="#2155F3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="@+id/fragmentDetailedMeme_textView_uploaded" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/fragmentDetailedMeme_textView_editMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="enable editmode"
+        android:textColor="#214EF3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentDetailedMeme_textView_uploaded" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="null,fragmentDetailedMeme_editText_title,fragmentDetailedMeme_textView_title"
+        tools:layout_editor_absoluteY="853dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
