@@ -31,13 +31,13 @@ class MemeAdapter (private val memeList: List<MemeObject>) : RecyclerView.Adapte
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        var imageView = itemView.findViewById<ImageView>(R.id.memeItem_imageView_memeImage)
+        val imageView = itemView.findViewById<ImageView>(R.id.memeItem_imageView_memeImage)
 
         fun bind(meme: MemeObject){
             Picasso.get().load(meme.source).into(imageView)
             Log.d("ViewHolder", "meme image source : ${meme.source}")
             imageView.setOnClickListener {
-                var bundle = Bundle()
+                val bundle = Bundle()
                 bundle.putParcelable("meme", meme)
                 imageView?.findNavController()?.navigate(R.id.action_gallaryFragment_to_detailedMemeFragment, bundle)
             }

@@ -1,13 +1,17 @@
 package com.example.memesearch.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.MultiAutoCompleteTextView
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.backendless.Backendless
@@ -32,6 +36,7 @@ class GalleryFragment : Fragment() {
     private var memeList : List<MemeObject> = listOf()
     private lateinit var rootView : View
     private var titleTagList : MutableList<String> = mutableListOf()
+    private var searchingForTagsTitles : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,9 +50,18 @@ class GalleryFragment : Fragment() {
 
 
         loadAllMemes()
+        rootView.fragmentGallery_multiAutoCompleteText_searchBar.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
 
+                    searchingForTagsTitles = rootView.fragmentGallery_multiAutoCompleteText_searchBar.text.toString()
+                    loadAllMemes()
 
-
+                    return true
+                }
+                return false
+            }
+        })
 
 
         return rootView
@@ -76,17 +90,12 @@ class GalleryFragment : Fragment() {
 
         Backendless.Data.of(MemeObject::class.java).find(queryBuilder, object : AsyncCallback<List<MemeObject>>{
             override fun handleResponse(foundMemes: List<MemeObject>){
-                memeList = foundMemes
+                memeList = foundMemes // At this point, Backendless gave all the meme objects from user ID
+                var memesToShow = memeList.toMutableList()
                 Log.d(TAG, "handleResponse: $foundMemes")
                 Log.d(TAG, "getAllMemes: memeList size : ${memeList.size}")
-                rootView.fragmentGallery_recyclerView_gallery.apply {
-                    setHasFixedSize(true)
-                    layoutManager = GridLayoutManager(activity, 3)
-                    adapter = MemeAdapter(memeList)
-                }
 
-                // Setting up search options for later
-                titleTagList = mutableListOf()
+                titleTagList = mutableListOf() // Clears the previous list of tags available to search for
                 for (eachMeme in memeList){
                     var memeTags : List<String> = eachMeme.tags?.split(",")!!.map {it.trim()} // this is a list of tags now
                     for (tag in memeTags){
@@ -95,11 +104,37 @@ class GalleryFragment : Fragment() {
                     if (!eachMeme.title.isNullOrEmpty()){
                         titleTagList.add(eachMeme.title.toString())
                     }
+                    // This adds the tags and title to the searchable list
                 }
                 for (eachTag in titleTagList){
                     Log.d(TAG, "generated tag from titleTagList: '$eachTag'")
                 }
-                updateSearchableList()
+                updateSearchableList() // Updates the tags available to search for. Auto drop down menu
+
+                if (!searchingForTagsTitles.isNullOrEmpty()){ // So the user is searching for something
+                    memesToShow = mutableListOf()
+                    for (meme in foundMemes){
+                        var memeAddedToMemesToShow = false
+                        var searchingTagList : List<String> = searchingForTagsTitles!!.split(",").map{it.trim()}
+                        Log.d(TAG, "searching Tag List: ${searchingTagList}")
+                        for (tag in searchingTagList){
+                            if (meme.tags.toString().contains(tag) && !memeAddedToMemesToShow) {
+                                memesToShow.add(meme)
+                                memeAddedToMemesToShow = true
+                            }
+                        }
+                    }
+                }
+
+                rootView.fragmentGallery_recyclerView_gallery.apply {
+                    setHasFixedSize(true)
+                    layoutManager = GridLayoutManager(activity, 3)
+                    adapter = MemeAdapter(memesToShow)
+                }
+
+                // Setting up search options for later
+
+
                 //Log.d(TAG, "generated TitleTagList: $titleTagList, titleTagList size: ${titleTagList.size}")
             }
             override fun handleFault(fault: BackendlessFault?){
@@ -109,8 +144,9 @@ class GalleryFragment : Fragment() {
         return memeList
     }
 
-    private fun loadSearchingMemes(searchBar : String) : List<MemeObject>  {
-        val whereClause = "ownerID = '$userId'"
+    /*private fun loadSearchingMemes(searchBar : String) : List<MemeObject>  {
+        var searchingTags : List<String> = searchBar.split(", ").map {it.trim()}
+        var whereClause = "ownerID = '$userId'"
         val queryBuilder = DataQueryBuilder.create()
         queryBuilder.whereClause = whereClause
 
@@ -118,7 +154,13 @@ class GalleryFragment : Fragment() {
             override fun handleResponse(foundMemes: List<MemeObject>){
                 //memeList = foundMemes
                 Log.d(TAG, "handleResponse: $foundMemes")
-                Log.d(TAG, "getAllMemes: memeList size : ${memeList.size}")
+                Log.d(TAG, "loadSearchingMemes: memeList size : ${memeList.size}")
+
+                //sort the data
+
+
+
+
                 rootView.fragmentGallery_recyclerView_gallery.apply {
                     setHasFixedSize(true)
                     layoutManager = GridLayoutManager(activity, 3)
@@ -130,7 +172,7 @@ class GalleryFragment : Fragment() {
             }
         })
         return memeList
-    }
+    }*/
 
     /*fun goToDetailedMeme(meme : MemeObject){
         var bundle = Bundle()
