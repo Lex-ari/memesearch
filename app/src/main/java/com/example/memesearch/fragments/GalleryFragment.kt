@@ -118,7 +118,7 @@ class GalleryFragment : Fragment() {
                         var searchingTagList : List<String> = searchingForTagsTitles!!.split(",").map{it.trim()}
                         Log.d(TAG, "searching Tag List: ${searchingTagList}")
                         for (tag in searchingTagList){
-                            if (meme.tags.toString().contains(tag) && !memeAddedToMemesToShow) {
+                            if (meme.tags.toString().contains(tag) && !memeAddedToMemesToShow && !tag.isNullOrEmpty()) {
                                 memesToShow.add(meme)
                                 memeAddedToMemesToShow = true
                             }

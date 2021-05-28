@@ -8,6 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.children
+import androidx.core.view.get
+import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.backendless.Backendless
@@ -17,6 +20,7 @@ import com.example.memesearch.R
 import com.example.memesearch.models.MemeObject
 import com.google.android.material.chip.Chip
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_detailed_meme.*
 import kotlinx.android.synthetic.main.fragment_detailed_meme.view.*
 
 
@@ -27,6 +31,7 @@ class DetailedMemeFragment : Fragment() {
 
     private lateinit var detailedMeme : MemeObject
     private lateinit var rootView : View
+    private var tagList : MutableList<String>? = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +52,22 @@ class DetailedMemeFragment : Fragment() {
         rootView.fragmentDetailedMeme_textView_source.text = detailedMeme.source
         rootView.fragmentDetailedMeme_textView_uploaded.text = "uploaded: ${detailedMeme.created.toString()}"
 
-        rootView.fragmentDetailedMeme_textView_editMode.setOnClickListener { // make changes enabled
+
+        tagList = (detailedMeme.tags?.split(",")?.map {it.trim()})?.toMutableList() // turning the String from Backendless into a list of strings for tags.
+        setTags()
+
+        rootView.fragmentDetailedMeme_textView_editMode.setOnClickListener { // make changes enabled be careful here
             rootView.fragmentDetailedMeme_editText_title.visibility = View.VISIBLE
             rootView.fragmentDetailedMeme_textView_title.visibility = View.GONE
             rootView.fragmentDetailedMeme_textView_editMode.text = "save changes"
             rootView.fragmentDetailedMeme_textView_deleteMeme.visibility = View.VISIBLE
+
+            setDeletableTags() // Clears the old tags in the chip group and replaces them with deletable ones
+
+
+
+
+
 
             rootView.fragmentDetailedMeme_textView_deleteMeme.setOnClickListener {
                 val builder = AlertDialog.Builder(activity)
@@ -78,6 +94,10 @@ class DetailedMemeFragment : Fragment() {
     }
 
     private fun updateMeme(){
+        // Putting any changes to the mutable list of tags into the string tags
+        detailedMeme.tags = tagList.toString().substring(1, tagList.toString().length - 1)
+
+
         Backendless.Data.of(MemeObject::class.java).save(detailedMeme, object : AsyncCallback<MemeObject?> {
             override fun handleResponse(response: MemeObject?){
                 Toast.makeText(activity, "Successfully updated meme",Toast.LENGTH_SHORT).show()
@@ -114,12 +134,32 @@ class DetailedMemeFragment : Fragment() {
 
 
     // https://mobikul.com/android-chips-dynamicaly-add-remove-tags-chips-view/
-    private fun setTag(tagList: List<String>, rootView: View) {
+    private fun setTags() { // clears the chipgroup and puts nice looking tags
         var chipGroup = rootView.fragmentDetailedMeme_chipGroup_tags
-        for (tag in tagList){
-            var chip = Chip(activity)
-            chip.text = tag
-            chipGroup.addView(chip)
+        chipGroup.removeAllViews()
+        if (tagList != null) {
+            for (tag in tagList!!){
+                var chip = Chip(activity)
+                chip.text = tag
+                chipGroup.addView(chip)
+            }
+        }
+    }
+
+    private fun setDeletableTags() { // clears the chip group and replaces tags that are deletable
+        var chipGroup = rootView.fragmentDetailedMeme_chipGroup_tags
+        chipGroup.removeAllViews()
+        if (tagList != null) {
+            for (tag in tagList!!) {
+                var chip = Chip(activity)
+                chip.text = tag
+                chip.isCloseIconVisible = true
+                chipGroup.addView(chip)
+                chip.setOnCloseIconClickListener {
+                    tagList!!.remove(tag)
+                    setDeletableTags()
+                }
+            }
         }
     }
 

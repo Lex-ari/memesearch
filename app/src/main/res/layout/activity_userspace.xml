@@ -13,4 +13,12 @@
         app:navGraph="@navigation/user_info_navigation"
         app:defaultNavHost="true" />
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/activityUserspace_navView_userSettings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_drawer"/>
+
+
 </androidx.drawerlayout.widget.DrawerLayout>
