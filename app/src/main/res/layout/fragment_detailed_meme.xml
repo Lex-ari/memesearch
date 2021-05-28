@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.DetailedMemeFragment">
+
+    <EditText
+        android:id="@+id/fragmentDetailedMeme_editText_source"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:hint="insert link to meme here"
+        android:imeOptions="actionGo"
+        android:singleLine="true"
+        android:textAlignment="textEnd"
+        android:textColor="#2155F3"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="@+id/fragmentDetailedMeme_textView_uploaded" />
 
     <TextView
         android:id="@+id/fragmentDetailedMeme_textView_deleteMeme"
@@ -33,6 +50,8 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
         android:hint="title"
+        android:imeOptions="actionGo"
+        android:singleLine="true"
         android:textColor="#000000"
         android:textSize="36sp"
         android:visibility="invisible"
@@ -114,9 +133,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
-        android:text="very long link"
         android:textAlignment="textEnd"
         android:textColor="#2155F3"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/fragmentDetailedMeme_textView_uploaded" />
@@ -146,6 +165,24 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="fragmentDetailedMeme_editText_title,fragmentDetailedMeme_textView_title"
         tools:layout_editor_absoluteY="853dp" />
+
+    <EditText
+        android:id="@+id/fragmentDetailedMeme_editText_newTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:fontFamily="@font/poppins_bold"
+        android:hint="tap here to add new tag"
+        android:imeOptions="actionGo"
+        android:inputType="none"
+        android:singleLine="true"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentDetailedMeme_textView_tags"
+        app:layout_constraintStart_toEndOf="@+id/fragmentDetailedMeme_textView_tags"
+        app:layout_constraintTop_toTopOf="@+id/fragmentDetailedMeme_textView_tags"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

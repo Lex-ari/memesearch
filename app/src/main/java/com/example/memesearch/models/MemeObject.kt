@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class MemeObject(
-        var source: String? = null,
+        var source: String? = "https://i.imgur.com/mJNhJJC.png",
         var tags: String? = null,
         var created: String? = null,
         var objectId: String? = null,

@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ import com.google.android.material.chip.Chip
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detailed_meme.*
 import kotlinx.android.synthetic.main.fragment_detailed_meme.view.*
+import kotlinx.android.synthetic.main.fragment_gallery.view.*
 
 
 @Suppress("UNNECESSARY_SAFE_CALL")
@@ -51,6 +53,7 @@ class DetailedMemeFragment : Fragment() {
         rootView.fragmentDetailedMeme_editText_title.setText(detailedMeme.title)
         rootView.fragmentDetailedMeme_textView_source.text = detailedMeme.source
         rootView.fragmentDetailedMeme_textView_uploaded.text = "uploaded: ${detailedMeme.created.toString()}"
+        //rootView.fragmentDetailedMeme_editText_source.setText(detailedMeme.source)
 
 
         tagList = (detailedMeme.tags?.split(",")?.map {it.trim()})?.toMutableList() // turning the String from Backendless into a list of strings for tags.
@@ -61,15 +64,39 @@ class DetailedMemeFragment : Fragment() {
             rootView.fragmentDetailedMeme_textView_title.visibility = View.GONE
             rootView.fragmentDetailedMeme_textView_editMode.text = "save changes"
             rootView.fragmentDetailedMeme_textView_deleteMeme.visibility = View.VISIBLE
+            rootView.fragmentDetailedMeme_editText_source.visibility = View.VISIBLE
+            rootView.fragmentDetailedMeme_textView_source.visibility = View.INVISIBLE
 
             setDeletableTags() // Clears the old tags in the chip group and replaces them with deletable ones
 
+            rootView.fragmentDetailedMeme_editText_newTag.visibility = View.VISIBLE
 
+            rootView.fragmentDetailedMeme_editText_newTag.setOnKeyListener(object : View.OnKeyListener { // enters in a new tag when the user hits enter
+                override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                    if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER && !rootView.fragmentDetailedMeme_editText_newTag.text.isNullOrEmpty()){
+                        if (tagList.isNullOrEmpty())
+                            tagList = mutableListOf()
+                        tagList?.add(rootView.fragmentDetailedMeme_editText_newTag.text.toString())
+                        rootView.fragmentDetailedMeme_editText_newTag.text = null
+                        setDeletableTags() // Basically updates the tags so the new one that the user inputted shows
+                        return true
+                    }
+                    return false
+                }
+            })
 
+            rootView.fragmentDetailedMeme_editText_source.setOnKeyListener(object : View.OnKeyListener {
+                override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                    if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
+                        detailedMeme.source = fragmentDetailedMeme_editText_source.text.toString()
+                        Picasso.get().load(detailedMeme.source).into(rootView.fragmentDetailedMeme_imageView_meme)
+                        return true
+                    }
+                    return false
+                }
+            })
 
-
-
-            rootView.fragmentDetailedMeme_textView_deleteMeme.setOnClickListener {
+            rootView.fragmentDetailedMeme_textView_deleteMeme.setOnClickListener { // starts deletion process when the user presses deleteMeme
                 val builder = AlertDialog.Builder(activity)
                 builder.setCancelable(true)
                 builder.setMessage("Are you sure? You will permanently loose your meme")
@@ -85,11 +112,18 @@ class DetailedMemeFragment : Fragment() {
             }
 
             rootView.fragmentDetailedMeme_textView_editMode.setOnClickListener { // saving changes
-                updateMeme()
                 detailedMeme.title = rootView.fragmentDetailedMeme_editText_title.text.toString()
-                detailedMeme.source = rootView.fragmentDetailedMeme_textView_source.text.toString()
+                updateMeme()
+                //detailedMeme.source = rootView.fragmentDetailedMeme_textView_source.text.toString()
+                setTags() // Updates tags so they look nice
             }
         }
+
+
+
+
+
+
         return rootView
     }
 
@@ -109,6 +143,12 @@ class DetailedMemeFragment : Fragment() {
                 rootView.fragmentDetailedMeme_textView_title.text = rootView.fragmentDetailedMeme_editText_title.text.toString()
                 rootView.fragmentDetailedMeme_textView_deleteMeme.visibility = View.GONE
                 rootView.fragmentDetailedMeme_textView_editMode.isClickable = true
+                rootView.fragmentDetailedMeme_editText_newTag.visibility = View.INVISIBLE
+                rootView.fragmentDetailedMeme_editText_source.visibility = View.GONE
+                rootView.fragmentDetailedMeme_textView_source.visibility = View.VISIBLE
+                rootView.fragmentDetailedMeme_textView_source.text = detailedMeme.source.toString()
+                rootView.fragmentDetailedMeme_textView_uploaded.text = "uploaded: ${detailedMeme.created.toString()}"
+
             }
             override fun handleFault(fault: BackendlessFault){
                 Toast.makeText(activity, "Meme was not successfully updated.", Toast.LENGTH_SHORT).show()

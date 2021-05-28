@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.MultiAutoCompleteTextView
-import android.widget.TextView
+import android.widget.*
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.backendless.Backendless
@@ -21,8 +19,14 @@ import com.backendless.persistence.DataQueryBuilder
 import com.example.memesearch.R
 import com.example.memesearch.helpers.MemeAdapter
 import com.example.memesearch.models.MemeObject
+import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_userspace.*
+import kotlinx.android.synthetic.main.activity_userspace.view.*
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.android.synthetic.main.fragment_gallery.view.*
+import kotlinx.android.synthetic.main.nav_drawer.*
+import kotlinx.android.synthetic.main.nav_drawer.view.*
 
 
 class GalleryFragment : Fragment() {
@@ -49,6 +53,7 @@ class GalleryFragment : Fragment() {
         Log.d(TAG, "onCreateView : userId = $userId")
 
 
+
         loadAllMemes()
         rootView.fragmentGallery_multiAutoCompleteText_searchBar.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
@@ -62,13 +67,32 @@ class GalleryFragment : Fragment() {
                 return false
             }
         })
-
-
+        rootView.fragmentGallery_textView_addMeme.setOnClickListener {
+            createBlankMeme()
+        }
         return rootView
     }
 
+    private fun createBlankMeme(){
+        val meme = MemeObject()
+        meme.ownerId = userId
+        Backendless.Data.of(MemeObject::class.java).save(meme, object : AsyncCallback<MemeObject?>{
+            override fun handleResponse(response: MemeObject?) {
+                //Toast.makeText(activity, "Meme Added Successfuly", Toast.LENGTH_SHORT).show()
+                val bundle = Bundle()
+                bundle.putParcelable("meme", meme)
+                bundle.putBoolean("edible", true)
+                rootView.findNavController()?.navigate(R.id.action_gallaryFragment_to_detailedMemeFragment, bundle)
+            }
+            override fun handleFault(fault: BackendlessFault?) {
+                Log.d(TAG, "handleFault: "  + fault?.message)
+            }
+        })
+    }
+
+
     private fun updateSearchableList(){
-        var adapter = ArrayAdapter<String>(rootView.context, android.R.layout.simple_dropdown_item_1line, titleTagList)
+        var adapter = ArrayAdapter<String>(rootView.context, android.R.layout.simple_dropdown_item_1line, titleTagList.distinct())
         rootView.fragmentGallery_multiAutoCompleteText_searchBar.setAdapter(adapter)
         rootView.fragmentGallery_multiAutoCompleteText_searchBar.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
     }
@@ -87,6 +111,7 @@ class GalleryFragment : Fragment() {
         val whereClause = "ownerID = '$userId'"
         val queryBuilder = DataQueryBuilder.create()
         queryBuilder.whereClause = whereClause
+        queryBuilder.setPageSize(100)
 
         Backendless.Data.of(MemeObject::class.java).find(queryBuilder, object : AsyncCallback<List<MemeObject>>{
             override fun handleResponse(foundMemes: List<MemeObject>){
@@ -97,9 +122,11 @@ class GalleryFragment : Fragment() {
 
                 titleTagList = mutableListOf() // Clears the previous list of tags available to search for
                 for (eachMeme in memeList){
-                    var memeTags : List<String> = eachMeme.tags?.split(",")!!.map {it.trim()} // this is a list of tags now
-                    for (tag in memeTags){
-                        titleTagList.add(tag)
+                    var memeTags : List<String>? = eachMeme.tags?.split(",")?.map {it.trim()} // this is a list of tags now
+                    if (!memeTags.isNullOrEmpty()) {
+                        for (tag in memeTags) {
+                            titleTagList.add(tag)
+                        }
                     }
                     if (!eachMeme.title.isNullOrEmpty()){
                         titleTagList.add(eachMeme.title.toString())
@@ -116,9 +143,9 @@ class GalleryFragment : Fragment() {
                     for (meme in foundMemes){
                         var memeAddedToMemesToShow = false
                         var searchingTagList : List<String> = searchingForTagsTitles!!.split(",").map{it.trim()}
-                        Log.d(TAG, "searching Tag List: ${searchingTagList}")
+                        Log.d(TAG, "searching Tag List: $searchingTagList")
                         for (tag in searchingTagList){
-                            if (meme.tags.toString().contains(tag) && !memeAddedToMemesToShow && !tag.isNullOrEmpty()) {
+                            if (meme.tags.toString().toLowerCase().contains(tag.toLowerCase()) && !memeAddedToMemesToShow && !tag.isNullOrEmpty()) {
                                 memesToShow.add(meme)
                                 memeAddedToMemesToShow = true
                             }
@@ -143,6 +170,8 @@ class GalleryFragment : Fragment() {
         })
         return memeList
     }
+
+
 
     /*private fun loadSearchingMemes(searchBar : String) : List<MemeObject>  {
         var searchingTags : List<String> = searchBar.split(", ").map {it.trim()}

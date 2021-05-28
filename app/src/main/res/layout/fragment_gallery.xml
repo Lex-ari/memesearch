@@ -9,12 +9,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragmentGallery_recyclerView_gallery"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentGallery_textView_scrollThroughAlbum" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentGallery_textView_addMeme" />
 
     <TextView
         android:id="@+id/fragmentGallery_textView_appName"
@@ -30,14 +30,16 @@
 
     <MultiAutoCompleteTextView
         android:id="@+id/fragmentGallery_multiAutoCompleteText_searchBar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/poppins_bold"
         android:hint="search here for titles, tags, desc, etc..."
-        app:layout_constraintEnd_toEndOf="parent"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/fragmentGallery_textView_appName" />
 
     <TextView
@@ -63,5 +65,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
+
+    <TextView
+        android:id="@+id/fragmentGallery_textView_addMeme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="add meme"
+        android:textColor="#103DE1"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/fragmentGallery_textView_scrollThroughAlbum"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentGallery_textView_scrollThroughAlbum" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
