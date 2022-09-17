@@ -1,6 +1,8 @@
 # memesearch
 ## An android utility to upload and save pictures to a backend server, and search them up with your own user-created tags!
 
+CURRENTLY UNAVAILABLE, BACKENDLESS TRIAL EXPIRED.
+
 Project done in mid-2021 for Mr. Shorr's Android Development class at the South Pasadena High School.
 
 I had a lot of "memes" and funny pictures saved on my phone, but it takes a lot of storage and it takes too much time to "dig" through and find the one "meme" I'm looking for. Also, searching the internet for the "meme" is difficult, since I sometimes remember small details that doesn't exactly describe the whole meme.
