@@ -13,3 +13,5 @@ Features:
 - 3xinf display of saved "memes" or photos, similar to tiktok or instagram.
 - Search bar used to search for tags created by the user.
 - Ability to upload pictures and set own tags and save.
+
+![meme Search concept](https://user-images.githubusercontent.com/65744075/190878020-c23c69d2-b808-4861-8f95-a790bc1b6aca.png)
