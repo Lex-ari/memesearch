@@ -14,7 +14,6 @@ Features:
 - Search bar used to search for tags created by the user.
 - Ability to upload pictures and set own tags and save.
 - Photos do not save to the phone! They save to backendless, meaning more storage space on phone!
-- Memes
 
 ![meme Search concept](https://user-images.githubusercontent.com/65744075/190878020-c23c69d2-b808-4861-8f95-a790bc1b6aca.png)
 
