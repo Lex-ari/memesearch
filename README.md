@@ -1,7 +1,7 @@
 # memesearch
 ## An android utility to upload and save pictures to a backend server, and search them up with your own user-created tags!
 
-CURRENTLY UNAVAILABLE, BACKENDLESS TRIAL EXPIRED.
+UPDATE 8/21/23: Backendless server has been REVIVED! 🎉
 
 Project done in mid-2021 for Mr. Shorr's Android Development class at the South Pasadena High School.
 
